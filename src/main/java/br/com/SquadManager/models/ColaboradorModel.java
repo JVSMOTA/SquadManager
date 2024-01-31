@@ -1,5 +1,6 @@
 package br.com.SquadManager.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
@@ -21,5 +22,10 @@ public class ColaboradorModel extends RepresentationModel<ColaboradorModel> {
     private String nome;
     private Cargo cargo;
     private String email;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "idSquad")
+    private SquadModel squad;
 
 }
