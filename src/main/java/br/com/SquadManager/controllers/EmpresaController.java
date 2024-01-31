@@ -51,7 +51,7 @@ public class EmpresaController {
     public ResponseEntity<Object> updateEmpresa(@PathVariable(value = "id") UUID id, @Valid @RequestBody EmpresaRecordDto empresaRecordDto) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(empresaService.updateEmpresa(id, empresaRecordDto));
-        } catch (EmpresaNotFoundException e) {
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }

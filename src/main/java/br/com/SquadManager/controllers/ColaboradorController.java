@@ -47,6 +47,25 @@ public class ColaboradorController {
         return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.getAllColaboradores());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateColaborador(@PathVariable(value = "id") UUID id, @Valid @RequestBody ColaboradorRecordDto colaboradorRecordDto) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.updateColaborador(id, colaboradorRecordDto));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteColaborador(@PathVariable(value = "id") UUID id) {
+        try {
+            colaboradorService.deleteColaborador(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Colaborador deleted successfully.");
+        } catch (ColaboradorNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationException(MethodArgumentNotValidException e) {

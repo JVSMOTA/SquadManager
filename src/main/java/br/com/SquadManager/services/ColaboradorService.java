@@ -4,7 +4,6 @@ import br.com.SquadManager.controllers.ColaboradorController;
 import br.com.SquadManager.dtos.ColaboradorRecordDto;
 import br.com.SquadManager.exceptions.ColaboradorNotFoundException;
 import br.com.SquadManager.models.ColaboradorModel;
-import br.com.SquadManager.models.ColaboradorModel;
 import br.com.SquadManager.repositories.ColaboradorRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,4 +45,15 @@ public class ColaboradorService {
         return colaborador;
     }
 
+    public ColaboradorModel updateColaborador(UUID id, ColaboradorRecordDto colaboradorRecordDto) {
+        ColaboradorModel colaborador = colaboradorRepository.findById(id).orElseThrow(ColaboradorNotFoundException::new);
+        BeanUtils.copyProperties(colaboradorRecordDto, colaborador);
+        colaboradorRepository.save(colaborador);
+        return colaborador;
+    }
+
+    public void deleteColaborador(UUID id) {
+        ColaboradorModel colaborador = colaboradorRepository.findById(id).orElseThrow(ColaboradorNotFoundException::new);
+        colaboradorRepository.delete(colaborador);
+    }
 }
