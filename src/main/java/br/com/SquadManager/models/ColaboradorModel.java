@@ -2,6 +2,7 @@ package br.com.SquadManager.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
                 @UniqueConstraint(name = "uk_email", columnNames = "email")
         }
 )
-public class ColaboradorModel {
+public class ColaboradorModel extends RepresentationModel<ColaboradorModel> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
