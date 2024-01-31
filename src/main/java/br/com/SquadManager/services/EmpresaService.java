@@ -45,4 +45,11 @@ public class EmpresaService {
         return empresa;
     }
 
+    public EmpresaModel updateEmpresa(UUID id, EmpresaRecordDto empresaRecordDto) {
+        EmpresaModel empresa = empresaRepository.findById(id).orElseThrow(EmpresaNotFoundException::new);
+        BeanUtils.copyProperties(empresaRecordDto, empresa);
+        empresaRepository.save(empresa);
+        return empresa;
+    }
+
 }

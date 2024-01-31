@@ -47,6 +47,15 @@ public class EmpresaController {
         return ResponseEntity.status(HttpStatus.OK).body(empresaService.getAllEmpresas());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateEmpresa(@PathVariable(value = "id") UUID id, @Valid @RequestBody EmpresaRecordDto empresaRecordDto) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(empresaService.updateEmpresa(id, empresaRecordDto));
+        } catch (EmpresaNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationException(MethodArgumentNotValidException e) {
