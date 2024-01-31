@@ -1,11 +1,8 @@
 package br.com.SquadManager.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.Valid;
 import lombok.Data;
-import org.apache.logging.log4j.message.Message;
-import org.aspectj.lang.annotation.DeclareError;
-import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.UUID;
 
@@ -17,7 +14,7 @@ import java.util.UUID;
         }
 )
 
-public class EmpresaModel {
+public class EmpresaModel extends RepresentationModel<EmpresaModel> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
