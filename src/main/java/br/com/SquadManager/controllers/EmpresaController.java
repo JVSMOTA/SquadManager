@@ -56,6 +56,16 @@ public class EmpresaController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteEmpresa(@PathVariable(value = "id") UUID id) {
+        try {
+            empresaService.deleteEmpresa(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Empresa deleted successfully.");
+        } catch (EmpresaNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public Map<String, String> handleValidationException(MethodArgumentNotValidException e) {

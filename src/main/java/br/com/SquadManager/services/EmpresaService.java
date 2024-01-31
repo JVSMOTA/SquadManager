@@ -52,4 +52,9 @@ public class EmpresaService {
         return empresa;
     }
 
+    public void deleteEmpresa(UUID id) {
+        EmpresaModel empresa = empresaRepository.findById(id).orElseThrow(EmpresaNotFoundException::new);
+        empresaRepository.delete(empresa);
+    }
+
 }
