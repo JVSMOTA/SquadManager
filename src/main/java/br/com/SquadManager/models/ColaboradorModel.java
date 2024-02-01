@@ -5,8 +5,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
 
-import java.util.UUID;
-
 @Data
 @Entity
 @Table(name = "TB_COLABORADORES",
@@ -18,14 +16,14 @@ public class ColaboradorModel extends RepresentationModel<ColaboradorModel> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idColaborador;
+    private Long idColaborador;
     private String nome;
     private Cargo cargo;
     private String email;
 
-    @ManyToOne
     @JsonIgnore
-    @JoinColumn(name = "idSquad")
+    @ManyToOne
+    @JoinColumn(name = "squad")
     private SquadModel squad;
 
 }

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
@@ -32,27 +31,27 @@ public class ColaboradorService {
         List<ColaboradorModel> colaboradorList = colaboradorRepository.findAll();
         if(!colaboradorList.isEmpty()){
             for (ColaboradorModel colaborador : colaboradorList) {
-                UUID id = colaborador.getIdColaborador();
+                Long id = colaborador.getIdColaborador();
                 colaborador.add(linkTo(methodOn(ColaboradorController.class).getOneColaborador(id)).withSelfRel());
             }
         }
         return colaboradorList;
     }
 
-    public ColaboradorModel getColaboradorById(UUID id) {
+    public ColaboradorModel getColaboradorById(Long id) {
         ColaboradorModel colaborador = colaboradorRepository.findById(id).orElseThrow(ColaboradorNotFoundException::new);
         colaborador.add(linkTo(methodOn(ColaboradorController.class).getAllColaboradors()).withSelfRel());
         return colaborador;
     }
 
-    public ColaboradorModel updateColaborador(UUID id, ColaboradorRecordDto colaboradorRecordDto) {
+    public ColaboradorModel updateColaborador(Long id, ColaboradorRecordDto colaboradorRecordDto) {
         ColaboradorModel colaborador = colaboradorRepository.findById(id).orElseThrow(ColaboradorNotFoundException::new);
         BeanUtils.copyProperties(colaboradorRecordDto, colaborador);
         colaboradorRepository.save(colaborador);
         return colaborador;
     }
 
-    public void deleteColaborador(UUID id) {
+    public void deleteColaborador(Long id) {
         ColaboradorModel colaborador = colaboradorRepository.findById(id).orElseThrow(ColaboradorNotFoundException::new);
         colaboradorRepository.delete(colaborador);
     }

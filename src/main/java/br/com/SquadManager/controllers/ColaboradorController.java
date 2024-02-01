@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/colaboradores")
@@ -33,10 +32,10 @@ public class ColaboradorController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getOneColaborador(@PathVariable(value = "id") UUID id) {
+    @GetMapping("/{idColaborador}")
+    public ResponseEntity<Object> getOneColaborador(@PathVariable(value = "idColaborador") Long idColaborador) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.getColaboradorById(id));
+            return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.getColaboradorById(idColaborador));
         } catch (ColaboradorNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -47,19 +46,19 @@ public class ColaboradorController {
         return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.getAllColaboradores());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateColaborador(@PathVariable(value = "id") UUID id, @Valid @RequestBody ColaboradorRecordDto colaboradorRecordDto) {
+    @PutMapping("/{idColaborador}")
+    public ResponseEntity<Object> updateColaborador(@PathVariable(value = "idColaborador") Long idColaborador, @Valid @RequestBody ColaboradorRecordDto colaboradorRecordDto) {
         try {
-            return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.updateColaborador(id, colaboradorRecordDto));
+            return ResponseEntity.status(HttpStatus.OK).body(colaboradorService.updateColaborador(idColaborador, colaboradorRecordDto));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteColaborador(@PathVariable(value = "id") UUID id) {
+    @DeleteMapping("/{idColaborador}")
+    public ResponseEntity<?> deleteColaborador(@PathVariable(value = "idColaborador") Long idColaborador) {
         try {
-            colaboradorService.deleteColaborador(id);
+            colaboradorService.deleteColaborador(idColaborador);
             return ResponseEntity.status(HttpStatus.OK).body("Colaborador deleted successfully.");
         } catch (ColaboradorNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

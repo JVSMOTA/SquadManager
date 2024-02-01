@@ -1,6 +1,5 @@
 package br.com.SquadManager.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -9,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @Entity
-@Table(name = "TB_SQUAD")
+@Table(name = "TB_SQUADS")
 public class SquadModel {
 
     @Id
@@ -17,13 +16,7 @@ public class SquadModel {
     private UUID idSquad;
     private String nome;
 
-    @ManyToOne
-    @JsonIgnore
-    @JoinColumn(name = "idEmpresa")
-    private EmpresaModel empresa;
-
-    @OneToMany(mappedBy = "squad", cascade = CascadeType.ALL)
-    @JsonIgnore
+    @OneToMany(mappedBy = "squad")
     private List<ColaboradorModel> colaboradores;
 
 }
