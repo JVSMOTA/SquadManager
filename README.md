@@ -1,8 +1,8 @@
 # SquadManager
 
 <div align="right">
-  
-[![HitCount](https://hits.dwyl.com/JVSMOTA/SquadManager.svg?style=flat-square)](http://hits.dwyl.com/JVSMOTA/SquadManager)
+
+[![Hits](https://hits.sh/github.com/JVSMOTA/SquadManager.svg)](https://hits.sh/github.com/JVSMOTA/SquadManager/)  
 
 </div>
 
